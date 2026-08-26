@@ -1,0 +1,27 @@
+-- setup_customer_db.sql
+-- Purpose: Create database, table, insert sample data
+
+-- 1. Create database (run outside target DB)
+CREATE DATABASE IF NOT EXISTS customer_db;
+
+-- 2. Create table
+CREATE TABLE IF NOT EXISTS customer (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone VARCHAR(20),
+    city VARCHAR(50),
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- 3. Insert sample data
+INSERT INTO customer (first_name, last_name, email, phone, city) VALUES
+('Alice', 'Johnson', 'alice@example.com', '555-0101', 'New York'),
+('Bob', 'Smith', 'bob@example.com', '555-0102', 'Los Angeles'),
+('Charlie', 'Brown', 'charlie@example.com', '555-0103', 'Chicago'),
+('Diana', 'Ross', 'diana@example.com', '555-0104', 'Houston'),
+('Ethan', 'Hunt', 'ethan@example.com', '555-0105', 'Phoenix');
+
+-- 4. Verify data
+SELECT * FROM customer;
