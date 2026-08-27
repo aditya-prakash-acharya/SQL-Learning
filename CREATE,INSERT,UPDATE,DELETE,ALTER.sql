@@ -1,0 +1,85 @@
+-- finish data table
+DROP TABLE customer
+DROP TABLE classroom
+
+-- show database
+SELECT * FROM customer
+SELECT * FROM classroom
+
+-- Customer Table
+CREATE TABLE customer (
+-- value datatype constraint
+    CustID int PRIMARY KEY,
+    CustName varchar(50) NOT NULL,
+    Age int NOT NULL,
+    City char(50),
+    Salary numeric
+);
+
+-- Insert values in customer table
+INSERT INTO customer (CustID, CustName, Age, City, Salary)
+VALUES
+(1, 'sam', 26, 'Delhi', 9008),
+(2, 'Ram', 19, 'Bangalore', 11000),
+(3, 'Pam', 31, 'Mumbai', 6060),
+(4, 'Sam', 42, 'Pune', 10000);
+
+-- Classroom Table
+CREATE TABLE classroom (
+    rollno int8 PRIMARY KEY,
+    name varchar(50) NOT NULL,
+    house char(12) NOT NULL,
+    grade char(1)
+);
+
+-- Insert values in classroom table
+INSERT INTO classroom (rollno, name, house, grade)
+VALUES
+(1, 'Sam', 'Akash', 'B'),
+(2, 'Ram', 'Agni', 'A'),
+(3, 'Shyam', 'Jal', 'B'),
+(4, 'Sundar', 'Agni', 'A'),
+(5, 'Ram', 'Yayu', 'B');
+
+-- Adding a new row to customer
+INSERT INTO customer (CustID, CustName, Age, City, Salary)
+VALUES (5, 'Alex', 25, 'Chennai', 15000);
+
+-- Update values in customer table
+UPDATE customer
+SET CustName = 'Xam', Age = 32
+WHERE CustID = 4;
+
+-- Update classroom table
+UPDATE classroom
+SET grade = 'C'
+WHERE rollno = 3;
+
+-- Delete values from customer table
+DELETE FROM customer
+WHERE CustID = 3;
+
+-- Delete a row from classroom
+DELETE FROM classroom
+WHERE rollno = 5;
+
+-- Adding a new column 'Email' to the customer table
+ALTER TABLE customer
+ADD Email varchar(100);
+
+-- Modifying an existing column (e.g., changing City size)
+ALTER TABLE customer 
+ALTER COLUMN City TYPE varchar(100);
+-- Note: Use ALTER COLUMN for SQL Server, MODIFY for MySQL, ALTER COLUMN TYPE for PostgreSQL
+
+-- Truncate Example: Removes all data but keeps structure
+TRUNCATE TABLE classroom;
+
+-- Verify the table is empty but exists
+SELECT * FROM classroom; 
+
+-- Drop Example: Deletes the table completely
+DROP TABLE customer;
+
+-- The following would now fail because the table is gone:
+SELECT * FROM customer; 
